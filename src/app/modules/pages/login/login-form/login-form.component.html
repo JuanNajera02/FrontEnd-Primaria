@@ -1,1 +1,28 @@
-<p>login-form works!</p>
+<div class="contenedorPrincipal">
+  <form>
+    <div class="contenedorImagen">
+      <img class="imagenLogo" src="../../../../../assets/imgs/LogoEmpresa.jpg" alt="logo">
+    </div>
+
+    <div class="contenedorLogin">
+
+      <mat-form-field class="">
+        <input matInput type="text" id="username" name="username" placeholder="Usuario" [(ngModel)]="creds.usuario" />
+      </mat-form-field>
+
+      <mat-form-field class="">
+        <input matInput type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="creds.password" />
+      </mat-form-field>
+
+      <button type="submit" class="boton btn" (click)="login()">Iniciar Sesion</button>
+
+      <div class="registrarse">
+        <p>¿No estás Registrado?</p>
+        <a href="/register">Crear Cuenta</a>
+      </div>
+      <div class="errorif" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+    </div>
+  </form>
+</div>

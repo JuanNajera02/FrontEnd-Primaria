@@ -1,0 +1,99 @@
+.contenedorPrincipal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #FDF7FF;
+  width: 100%;
+  border-radius: 40px;
+  height: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+}
+
+
+.contenedorLogin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+
+
+.contenedorImagen {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF8F0;
+  align-items: center;
+  border-radius: 5px;
+  width: 100%; /* Puedes ajustar este valor según tus necesidades */
+  max-width: 300px; /* Agrega un ancho máximo para evitar que la imagen se estire demasiado */
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto; /* Permite que la altura se ajuste proporcionalmente al ancho */
+  border-radius: 5px; /* Puedes ajustar el radio del borde según tu preferencia */
+  max-height: 150px; /* Ajusta este valor según tus necesidades */
+}
+
+.contenedorPag {
+  min-height: 100vh; /* Asegura que la altura sea al menos del 100% del viewport */
+}
+
+.registrarse{
+  display: flex;
+  margin-top: 20px;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.boton{
+  margin-top: 15px;
+  background-color: #9B89B3; /* Color de fondo */
+  color: #080708; /* Color del texto */
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px; /* Ajusta el padding para hacerlo más grande */
+  cursor: pointer;
+  height: 45px;
+  font-size: 1rem; /* Tamaño de fuente más grande */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+
+
+.registrarse {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.registrarse a {
+  color: #080708;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+
+.inputLogin{
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  padding: 10px;
+  width: 90%;
+  height: 50px;
+  border: none;
+}
+
+.errorif{
+  color: 080708;
+  font-size: 1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
