@@ -1,0 +1,60 @@
+.form-container  {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);   
+}
+.monetary-form-container{
+    border: 1px solid black;
+    width: 80%;
+    margin:0 auto;
+    padding: 20px;
+    background-color: #fdf7ff;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-registrar-movimiento{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.btn-registrar-movimiento button{
+    color: #c471ed;
+    background-color: beige;
+    padding: 12px;
+    border: none;
+    font-weight:bolder;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;   
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+.input-container input {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+}
+.input-container select {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.input-container h4 {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+.section1{
+    display: flex;
+
+}
+.section1 h4{
+    color: #fff;
+    font-weight: lighter;
+}

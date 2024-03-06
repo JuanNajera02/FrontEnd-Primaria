@@ -1,0 +1,16 @@
+.titulo{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    background:  linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);
+    margin-bottom: 20px;
+    width: 40%;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+.titulo h2 {
+    margin: 0;
+
+}

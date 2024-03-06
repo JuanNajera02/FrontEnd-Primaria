@@ -1,1 +1,50 @@
-<p>monetary-form works!</p>
+<div class="monetary-form-container">
+    <app-monetary-title/>
+    <form class="form-container">
+        <section class="section1">
+
+            <div class="input-container">
+                <h4>Tipo de movimiento</h4>
+                <select (change)="tipoDeMovimientoSelect($event)">
+                    <option>INGRESOS</option>
+                    <option>EGRESOS</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <h4>Persona:</h4>
+                <input type="text"/>
+            </div>
+
+            <div class="input-container">
+                <app-monetary-search/>
+            </div>
+
+        </section>
+        <section class="section1">
+            
+            <div class="input-container">
+                <h4>concepto:</h4>
+                <input type="text"/>
+            </div>
+
+            <div class="input-container">
+                <h4>importe: </h4>
+                <input type="text"/>
+            </div>
+        </section>
+
+        <section class="section1">
+            <div class="input-container">
+                <h4>motivo: </h4>
+                <input type="text"/>
+            </div>
+        </section>
+
+        <section class="section1 btn-registrar-movimiento">
+
+            <button>Registrar Movimiento</button>
+        </section>
+
+    </form>
+</div>

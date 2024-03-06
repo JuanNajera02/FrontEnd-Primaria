@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-monetary-title',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './monetary-title.component.css'
 })
 export class MonetaryTitleComponent {
+
+  @Input() nombreEscuela:string = "Escuela de Prueba"; 
 
 }

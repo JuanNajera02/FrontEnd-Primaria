@@ -1,0 +1,29 @@
+
+.monetary-search{
+    display: flex;
+    margin-left: 15px;
+    margin-right: 15px;
+    align-items: center;
+
+}
+.monetary-search input {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+}
+.monetary-search button{
+    color: #c471ed;
+    background-color: beige;
+    padding: 6px;
+    border: none;
+    font-weight:bolder;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;   
+    margin-left: 10px;
+    width: 130px
+}
+h4 {
+    margin-right: 10px;
+    margin-left: 20px;
+}
