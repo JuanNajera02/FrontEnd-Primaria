@@ -1,1 +1,47 @@
-<p>register-form works!</p>
+<div class="contenedorPrincipal">
+  <form>
+    <div class="contenedorImagen">
+      <img class="imagenLogo" src="../../../../../assets/imgs/LogoEmpresa.jpg" alt="logo">
+    </div>
+
+    <div class="contenedorLogin">
+      <mat-form-field class="inputStyles">
+        <input matInput type="text" id="username" name="username" placeholder="Usuario" [(ngModel)]="Register.user" />
+      </mat-form-field>
+
+      <mat-form-field class="inputStyles">
+        <mat-label>Tipo de Usuario:</mat-label>
+        <mat-select id="rol" name="rol" [(ngModel)]="Register.role">
+          <mat-option value="DIRECTOR">Director</mat-option>
+          <mat-option value="ASISTENTE">Asistente</mat-option>
+          <mat-option value="TESORERO">Tesorero</mat-option>
+          <mat-option value="PRESIDENTE">Presidente</mat-option>
+          <mat-option value="SUPERVISOR">Supervisor</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="inputStyles">
+        <input matInput type="email" id="email" name="email" placeholder="Email" [(ngModel)]="Register.email" />
+      </mat-form-field>
+
+      <mat-form-field class="inputStyles">
+        <input matInput type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="Register.password" />
+      </mat-form-field>
+
+      <mat-form-field class="inputStyles">
+        <input class="inputStyles" matInput type="password" id="passwordVerification" name="passwordVerification" placeholder="Repetir contraseña" [(ngModel)]="Register.passwordVerification" />
+      </mat-form-field>
+
+      <button type="submit" class="boton btn inputStyles" (click)="register()">Registrarse</button>
+
+      <div class="registrarse inputStyles">
+        <p>¿Ya tienes cuenta?</p>
+        <a href="/login">Iniciar Sesión</a>
+      </div>
+
+      <div class="errorif" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+    </div>
+  </form>
+</div>

@@ -6,7 +6,7 @@
   background-color: #FDF7FF;
   width: 100%;
   border-radius: 40px;
-  height: 500px;
+  height: 95%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
 }
 
@@ -20,7 +20,14 @@
   margin: 0 auto;
 }
 
+p{
+  color: #4B4453;
+}
 
+a{
+  color: #4B4453;
+  margin-top: 15px;
+}
 
 .contenedorImagen {
   display: flex;
@@ -31,6 +38,7 @@
   width: 100%; /* Puedes ajustar este valor según tus necesidades */
   max-width: 300px; /* Agrega un ancho máximo para evitar que la imagen se estire demasiado */
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 img {
@@ -54,7 +62,7 @@ img {
 .boton{
   margin-top: 15px;
   background-color: #9B89B3; /* Color de fondo */
-  color: #080708; /* Color del texto */
+  color: #FDF7FF; /* Color del texto */
   border: none;
   border-radius: 10px;
   padding: 10px 20px; /* Ajusta el padding para hacerlo más grande */
