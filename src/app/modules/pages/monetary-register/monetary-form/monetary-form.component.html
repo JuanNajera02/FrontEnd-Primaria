@@ -5,45 +5,50 @@
 
             <div class="input-container">
                 <h4>Tipo de movimiento</h4>
-                <select (change)="tipoDeMovimientoSelect($event)">
-                    <option>INGRESOS</option>
-                    <option>EGRESOS</option>
+                <select [(ngModel)]="movimiento.tipoMovimiento" (change)="movimiento.tipoMovimiento=tipoDeMovimientoSelect($event)" name="tipoMovimiento">
+                    <option>INGRESO</option>
+                    <option>EGRESO</option>
                 </select>
             </div>
 
             <div class="input-container">
                 <h4>Persona:</h4>
-                <input type="text"/>
+                <input type="text" [(ngModel)]="movimiento.persona" name="persona"/>
             </div>
 
             <div class="input-container">
-                <app-monetary-search/>
+                <app-monetary-search (movimientoEvent)="receiveMovimiento($event)"/>
             </div>
 
         </section>
         <section class="section1">
-            
+
             <div class="input-container">
                 <h4>concepto:</h4>
-                <input type="text"/>
+                <input type="text" [(ngModel)]="movimiento.concepto" name="concepto"/>
             </div>
 
             <div class="input-container">
                 <h4>importe: </h4>
-                <input type="text"/>
+                <input type="text" [(ngModel)]="movimiento.importe" name="importe"/>
             </div>
         </section>
 
         <section class="section1">
             <div class="input-container">
                 <h4>motivo: </h4>
-                <input type="text"/>
+                <input type="text" [(ngModel)]="movimiento.motivo" name="motivo"/>
             </div>
+
+          <div class="input-container">
+            <h4>Fecha: </h4>
+            <input type="text" [(ngModel)]="movimiento.fecha" name="fecha"/>
+          </div>
         </section>
 
         <section class="section1 btn-registrar-movimiento">
 
-            <button>Registrar Movimiento</button>
+            <button (click)="addMovimiento()">Registrar Movimiento</button>
         </section>
 
     </form>

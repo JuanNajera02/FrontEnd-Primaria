@@ -10,6 +10,6 @@ export const routes: Routes = [
   {path:"movimientos",component:MonetaryRegisterComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'register', component: RegisterComponent},
-  { path: 'report', component: ReportComponent}
+  { path: 'report', component: ReportComponent},
   { path: 'home', component: HomeComponent}
 ];
