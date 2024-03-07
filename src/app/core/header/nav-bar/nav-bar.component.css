@@ -1,0 +1,91 @@
+
+.contenedor-navbar{
+  background: linear-gradient(to right, #c471ed, #bba2c7);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-top:20px;
+  gap: 60px;
+}
+
+.contenedor-img .imagen {
+  width: 120px;
+  height: auto; /* permite que la altura se ajuste proporcionalmente al ancho */
+  border-radius: 50%; /* si deseas bordes redondeados */
+  margin-left: 100px;
+}
+
+.contenedor-3forms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: aliceblue;
+  width: 500px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  gap:5px
+}
+
+.contenedor-escuelas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: aliceblue;
+  width: 300px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.contenedor-salir{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: aliceblue;
+  width: 180px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.btn-navbar{
+  background: #9B89B3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+  height: 60px;
+}
+
+
+.contenedor-escuelas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: aliceblue;
+  width: 250px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  gap: 15px;
+}
+
+
+.contenedor-img-small .img-small{
+  width: 60px;
+  height: auto; /* permite que la altura se ajuste proporcionalmente al ancho */
+  border-radius: 50%; /* si deseas bordes redondeados */
+}
+
+
+
+
