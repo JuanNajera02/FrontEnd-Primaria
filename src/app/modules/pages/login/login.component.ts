@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { LoginFormComponent } from './login-form/login-form.component';
+import {AuthenticationService} from "../../../shared/authentication.service";
 
 @Component({
   selector: 'app-login',

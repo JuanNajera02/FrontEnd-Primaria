@@ -13,7 +13,7 @@
 
             <div class="input-container">
                 <h4>Persona:</h4>
-                <input type="text" [(ngModel)]="movimiento.persona" name="persona"/>
+                <input type="text"  [(ngModel)]="movimiento.persona" name="persona"/>
             </div>
 
             <div class="input-container">
@@ -32,6 +32,18 @@
                 <h4>importe: </h4>
                 <input type="text" [(ngModel)]="movimiento.importe" name="importe"/>
             </div>
+
+          <div class="input-container">
+
+
+            <h4>Clasificacion: </h4>
+            <select [(ngModel)]="movimiento.idClasificacion" (change)="movimiento.idClasificacion=tipoDeClasificacionSelect($event)" name="idClasificacion">
+              @for (clasificacion of clasificaciones; track clasificacion.id){
+                <option value="{{clasificacion.id}}">{{ clasificacion.nombre }}</option>
+              }
+            </select>
+          </div>
+
         </section>
 
         <section class="section1">

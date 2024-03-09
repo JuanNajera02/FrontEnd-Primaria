@@ -1,0 +1,8 @@
+.main {
+  background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; /* Abarcará toda la pantalla */
+}

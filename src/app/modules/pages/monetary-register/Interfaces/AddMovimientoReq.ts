@@ -7,6 +7,7 @@ export interface AddMovimientoReq{
   motivo:string
   fecha:string,
   idEscuela:number
-  idClasificacion:number
+  idClasificacion:string
   idUsuario:number
+  clasificacion:string
 }

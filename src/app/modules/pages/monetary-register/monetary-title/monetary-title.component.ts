@@ -9,6 +9,4 @@ import { Component, Input } from '@angular/core';
 })
 export class MonetaryTitleComponent {
 
-  @Input() nombreEscuela:string = "Escuela de Prueba"; 
-
 }

@@ -5,4 +5,6 @@ export interface Movimiento{
   concepto:string,
   importe:number,
   motivo:string
+  clasificacion:string,
+  idClasificacion:string
 }

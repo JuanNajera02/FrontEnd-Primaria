@@ -15,7 +15,12 @@
     </div>
 
     <div class="contendor-btn">
-      <button  class="btn-navbar">Registrar</button>
+      <select [(ngModel)]="selectedValueRegister" (change)="onSelectedRegister($event)"  class="btn-navbar" name="registrar">
+        <option selected disabled>Registrar</option>
+        <option value="escuelas">Escuelas</option>
+        <option value="movimientos">Movimientos</option>
+      </select>
+<!--      <button  class="btn-navbar">Registrar</button>-->
     </div>
 
     <div class="contendor-btn">
@@ -32,7 +37,13 @@
     </div>
 
     <div class="contendor-btn">
-      <button  class="btn-navbar">Escuelas</button>
+      <select class="btn-navbar" (change)="onSelectEscuela($event)">
+        <option selected disabled>Escuelas</option>
+        @for (escuela of escuelas;track escuela.id){
+          <option [value]="escuela.id">{{ escuela.nombre }}</option>
+
+        }
+      </select>
     </div>
 
 
@@ -40,7 +51,7 @@
 
   <div class="contenedor-salir">
     <div class="contendor-btn">
-      <button  class="btn-navbar">Salir</button>
+      <button (click)="salir()" class="btn-navbar">Salir</button>
     </div>
 
   </div>

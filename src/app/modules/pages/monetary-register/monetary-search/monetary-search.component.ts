@@ -19,7 +19,10 @@ export class MonetarySearchComponent {
   buscarMovimiento() {
     if (Number.parseInt(this.idMovimiento) < 0) return;
     this.monetaryServ.getMovimiento(this.idMovimiento).subscribe({
-      next : (movimiento) => this.movimientoEvent.emit(movimiento),
+      next : (movimiento) => {
+        console.log("mov",movimiento)
+        this.movimientoEvent.emit(movimiento)
+      },
       error: (error) => console.log(error.message)
     })
   }

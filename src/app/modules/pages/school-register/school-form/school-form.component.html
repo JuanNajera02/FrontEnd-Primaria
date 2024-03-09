@@ -1,1 +1,51 @@
-<p>school-form works!</p>
+<div class="monetary-form-container">
+  <app-school-title/>
+  <form class="form-container">
+    <section class="section1">
+
+
+      <div class="input-container">
+        <h4>Clave de la escuela:</h4>
+        <input type="text" [(ngModel)]="escuela.clave" name="clave"/>
+      </div>
+
+
+      <div class="input-container">
+        <h4>Localidad: </h4>
+        <input type="text" [(ngModel)]="escuela.localidad" name="localidad"/>
+      </div>
+
+      <div class="input-container">
+        <app-school-search (escuelaEvent)="receiveEscuela($event)"/>
+      </div>
+
+    </section>
+    <section class="section1">
+
+      <div class="input-container">
+        <h4>Sector:</h4>
+        <input type="text" [(ngModel)]="escuela.sector" name="sector"/>
+      </div>
+
+      <div class="input-container">
+        <h4>Zona: </h4>
+        <input type="text" [(ngModel)]="escuela.zona" name="zona"/>
+      </div>
+    </section>
+
+    <section class="section1">
+      <div class="input-container">
+        <h4>Nombre de la escuela: </h4>
+        <input type="text" [(ngModel)]="escuela.nombre" name="nombre"/>
+      </div>
+
+
+    </section>
+
+    <section class="section1 btn-registrar-movimiento">
+
+      <button (click)="registrarEscuela()">Registrar Escuela</button>
+    </section>
+
+  </form>
+</div>
