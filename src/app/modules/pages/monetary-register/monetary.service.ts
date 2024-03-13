@@ -22,4 +22,8 @@ export class MonetaryService {
 
   }
 
+  getMovimientosByFechas(fechaInicio:string,fechaFin:string):Observable<Movimiento[]>{
+    return this.http.get<Movimiento[]>(`${this.url}/Movimientos/getMovimientosByFechas?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}`)
+  }
+
 }
