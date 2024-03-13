@@ -27,15 +27,41 @@ export class SchoolFormComponent {
     clave: "",
     id: '',
     nombre: '',
-    balance: 0,
     sector: '',
     zona: '',
     localidad: ''
   }
+  handleErrors():string{
+    let errorMessage = ""
+    if (this.escuela.clave === "") errorMessage += "Clave no puede estar vacia\n"
+    if (this.escuela.nombre === "") errorMessage += "Nombre no puede estar vacio\n"
+    if (this.escuela.sector === "") errorMessage += "Sector no puede estar vacio\n"
+    if (this.escuela.zona === "") errorMessage += "Zona no puede estar vacia\n"
+    if (this.escuela.localidad === "") errorMessage += "Localidad no puede estar vacia\n"
+    return errorMessage
 
-  registrarEscuela(){
-    this.schoolServ.registrarEscuela(this.escuela).subscribe(() => console.log("se agrego una escuela correctamente"))
   }
+  cleanInputs(){
+    this.escuela.clave = ""
+    this.escuela.nombre = ""
+    this.escuela.sector = ""
+    this.escuela.zona = ""
+    this.escuela.localidad = ""
+
+  }
+  registrarEscuela() {
+    this.schoolServ.registrarEscuela(this.escuela).subscribe({
+      next: () => {
+        alert("Escuela registrada correctamente")
+        this.cleanInputs()
+      },
+      error: (err) =>{
+        console.log(err.message)
+        alert(this.handleErrors())
+      }
+    })
+  }
+
   receiveEscuela(escuela:School){
     this.escuela = escuela
   }

@@ -1,4 +1,4 @@
-<div class="monetary-form-container">
+<div class="monetary-form-container" >
     <app-monetary-title/>
     <form class="form-container">
         <section class="section1">
@@ -39,7 +39,7 @@
             <h4>Clasificacion: </h4>
             <select [(ngModel)]="movimiento.idClasificacion" (change)="movimiento.idClasificacion=tipoDeClasificacionSelect($event)" name="idClasificacion">
               @for (clasificacion of clasificaciones; track clasificacion.id){
-                <option value="{{clasificacion.id}}">{{ clasificacion.nombre }}</option>
+                <option  value="{{clasificacion.id}}">{{ clasificacion.nombre }}</option>
               }
             </select>
           </div>
@@ -54,7 +54,7 @@
 
           <div class="input-container">
             <h4>Fecha: </h4>
-            <input type="text" [(ngModel)]="movimiento.fecha" name="fecha"/>
+            <input type="date" [(ngModel)]="movimiento.fecha" name="fecha"/>
           </div>
         </section>
 

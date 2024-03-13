@@ -23,6 +23,17 @@ export class RegisterFormComponent {
   };
   error: any;
 
+  handleErrors():string{
+    let messageError = "";
+    if (this.Register.user === "") messageError += "El usuario no puede estar vacio\n";
+    if (this.Register.email === "") messageError += "El email no puede estar vacio\n";
+    if (this.Register.password === "") messageError += "La contraseña no puede estar vacia\n";
+    if (this.Register.passwordVerification === "") messageError += "La verificación de contraseña no puede estar vacia\n";
+    if (this.Register.password !== this.Register.passwordVerification) messageError += "Las contraseñas no coinciden\n";
+    return messageError;
+
+
+  }
 
   register(){
 

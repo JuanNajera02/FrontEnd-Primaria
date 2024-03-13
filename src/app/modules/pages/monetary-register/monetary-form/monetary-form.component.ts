@@ -28,7 +28,6 @@ export class MonetaryFormComponent implements OnInit  {
   constructor(private monetaryServ:MonetaryService,private clasServ:ClasificacionService,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params)
     this.getClasificaciones();
   }
 
@@ -56,9 +55,22 @@ export class MonetaryFormComponent implements OnInit  {
 
   }
 
+  handleErrors():string{
+    let errorMessage = ""
+    if (this.movimiento.fecha === "") errorMessage += "Fecha no puede estar vacia\n"
+    if (this.movimiento.persona === "") errorMessage += "Persona no puede estar vacia\n"
+    if (this.movimiento.concepto === "") errorMessage += "Concepto no puede estar vacia\n"
+    if (this.movimiento.importe === 0 || this.movimiento.importe === null) errorMessage += "Importe no puede estar vacia\n"
+    if (this.movimiento.motivo === "") errorMessage += "Motivo no puede estar vacia\n"
+    if (this.movimiento.idClasificacion === "") errorMessage += "Clasificacion no puede estar vacia\n"
+    return errorMessage
+  }
+
   addMovimiento(){
     const idUsuario = JSON.parse(localStorage.getItem("usuarioPrimaria") as string).idUsuario
     const idEscuela = this.route.snapshot.queryParams['idEscuela']
+
+
     let newMovimiento:AddMovimientoReq = {
       ...this.movimiento,
       "idEscuela":idEscuela,
@@ -70,7 +82,9 @@ export class MonetaryFormComponent implements OnInit  {
         alert("Movimiento agregado")
         this.cleanInputs()
       },
-      error :(err) => console.log(err.message)
+      error :(err)=> {
+        alert(this.handleErrors())
+      }
     })
   }
 }
