@@ -17,7 +17,6 @@ export class MonetaryService {
   }
 
   addMovimiento(addMovimientoReq:AddMovimientoReq):Observable<any>{
-    console.log(addMovimientoReq)
 
     return this.http.post(`${this.url}/Movimientos/addMovimiento`,addMovimientoReq)
 

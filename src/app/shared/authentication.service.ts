@@ -18,7 +18,6 @@ export class AuthenticationService {
   signUp(){}
 
   isAuthenticated():boolean{
-    console.log(localStorage.getItem("usuarioPrimaria"))
     return localStorage.getItem("usuarioPrimaria") !== null
   }
 }

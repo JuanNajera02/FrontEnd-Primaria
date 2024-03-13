@@ -28,12 +28,12 @@ export class MonetaryFormComponent implements OnInit  {
   constructor(private monetaryServ:MonetaryService,private clasServ:ClasificacionService,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.params)
     this.getClasificaciones();
   }
 
   private getClasificaciones() {
     this.clasServ.getClasificaciones().subscribe(clasificaciones => {
-      console.log(clasificaciones)
       this.clasificaciones = clasificaciones
     })
   }
@@ -47,14 +47,30 @@ export class MonetaryFormComponent implements OnInit  {
     this.movimiento = mov;
   }
 
+  cleanInputs(){
+    this.movimiento.fecha = ""
+    this.movimiento.persona = ""
+    this.movimiento.concepto = ""
+    this.movimiento.importe = 0
+    this.movimiento.motivo = ""
+
+  }
+
   addMovimiento(){
     const idUsuario = JSON.parse(localStorage.getItem("usuarioPrimaria") as string).idUsuario
-    const idEscuela = this.route.snapshot.params['idEscuela']
+    const idEscuela = this.route.snapshot.queryParams['idEscuela']
     let newMovimiento:AddMovimientoReq = {
       ...this.movimiento,
       "idEscuela":idEscuela,
       "idUsuario":idUsuario
     }
-    this.monetaryServ.addMovimiento(newMovimiento).subscribe(() => console.log("se agrego un movimiento correctamente"))
+
+    this.monetaryServ.addMovimiento(newMovimiento).subscribe({
+      next:() => {
+        alert("Movimiento agregado")
+        this.cleanInputs()
+      },
+      error :(err) => console.log(err.message)
+    })
   }
 }
