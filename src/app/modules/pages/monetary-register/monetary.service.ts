@@ -12,8 +12,8 @@ export class MonetaryService {
   url:string = "http://localhost:8080"
   constructor(private http:HttpClient) { }
 
-  getMovimiento(idMovimiento:string):Observable<Movimiento>{
-    return this.http.get<Movimiento>(`${this.url}/Movimientos/getMovimiento?idMovimiento=${idMovimiento}`)
+  getMovimiento(idMovimiento:string,idEscuela:string):Observable<Movimiento>{
+    return this.http.get<Movimiento>(`${this.url}/Movimientos/getMovimiento?idMovimiento=${idMovimiento}&idEscuela=${idEscuela}`)
   }
 
   addMovimiento(addMovimientoReq:AddMovimientoReq):Observable<any>{

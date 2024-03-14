@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {MonetaryService} from "../monetary.service";
 import {Movimiento} from "../Interfaces/MovimientoResponse";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-monetary-search',
@@ -14,16 +15,17 @@ export class MonetarySearchComponent {
   idMovimiento: string = "";
 
   @Output() movimientoEvent = new EventEmitter<Movimiento>
-  constructor(private monetaryServ:MonetaryService) {}
+  constructor(private monetaryServ:MonetaryService,private route:ActivatedRoute) {}
 
   buscarMovimiento() {
     if (Number.parseInt(this.idMovimiento) < 0) return;
-    this.monetaryServ.getMovimiento(this.idMovimiento).subscribe({
+    const idEscuela = this.route.snapshot.queryParams['idEscuela']
+
+    this.monetaryServ.getMovimiento(this.idMovimiento,idEscuela).subscribe({
       next : (movimiento) => {
-        console.log("mov",movimiento)
         this.movimientoEvent.emit(movimiento)
       },
-      error: (error) => console.log(error.message)
+      error: (error) => alert(error.error.message)
     })
   }
 }
