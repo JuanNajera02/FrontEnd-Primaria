@@ -21,8 +21,6 @@
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
     "@igniteui/material-icons-extended": "^3.0.0",
-    "apex-grid": "^1.0.1",
-    "apexcharts": "^3.46.0",
     "fflate": "^0.8.1",
     "igniteui-angular": "^17.1.2",
     "igniteui-angular-charts": "^17.2.1",
@@ -30,6 +28,7 @@
     "minireset.css": "~0.0.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

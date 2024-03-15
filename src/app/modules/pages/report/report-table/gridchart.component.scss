@@ -1,4 +1,87 @@
-apex-grid {
-  min-height: 40vh;
+/* gridchart.component.scss */
+
+/* Estilo para el contenedor de la tabla */
+.grid-container {
   margin: 20px;
+  text-align: center; /* Centra el contenido */
+
+}
+
+/* Estilo para el input de filtro */
+.filter-input {
+  margin: 10px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px; /* Ancho fijo para el input */
+  box-sizing: border-box; /* Incluir el padding en el ancho */
+}
+
+/* Estilo para el botón de limpiar filtros */
+.clear-filter-btn {
+  padding: 8px 12px;
+  background-color: #4CAF50; /* Color de fondo verde */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transición suave de color de fondo */
+}
+
+.clear-filter-btn:hover {
+  background-color: #45a049; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilo para la tabla */
+.grid-table {
+  width: 100%;
+  
+  // Añadido para que la tabla sea responsive
+  overflow-x: auto;
+
+  // Fin de añadido
+}
+
+.export-btn {
+  color: #c471ed;
+  background-color: beige;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  font-weight:bolder;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 16px;   
+}
+
+
+/* Estilo para los encabezados de columna */
+.grid-table th {
+  background-color: #4CAF50; /* Color de fondo verde oscuro */
+  color: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.grid-table tr {
+  background-color: #ffffff; /* Color de fondo verde oscuro */
+  border: 1px solid #eef3e5;
+
+}
+
+/* Estilo para las celdas de datos */
+.grid-table td {
+  padding: 10px;
+  border: 1px solid #eef3e5;
+}
+
+/* Estilo para las filas de datos alternas */
+.grid-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para las filas de datos cuando se pasa el mouse sobre ellas */
+.grid-table tbody tr:hover {
+  background-color: #ddd;
 }
