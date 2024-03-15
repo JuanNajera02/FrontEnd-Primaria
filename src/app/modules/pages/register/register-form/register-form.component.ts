@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { RegisterService } from '../register.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-register-form',
   standalone: true,
@@ -14,6 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './register-form.component.css'
 })
 export class RegisterFormComponent {
+
+
+  constructor(private registerserv: RegisterService ,private route:ActivatedRoute) {}
+
+
   Register: Register = {
     role: Role.DIRECTOR,
     user: '',
