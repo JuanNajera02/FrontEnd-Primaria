@@ -8,6 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterService } from '../register.service';
 import { ActivatedRoute } from '@angular/router';
+
+
 @Component({
   selector: 'app-register-form',
   standalone: true,
@@ -22,28 +24,41 @@ export class RegisterFormComponent {
 
 
   Register: Register = {
-    role: Role.DIRECTOR,
-    user: '',
+    idRol: Role.DIRECTOR,
+    usuario: '',
     email: '',
     password: '',
     passwordVerification: '',
   };
   error: any;
 
-  handleErrors():string{
+  handleErrors(Register: Register):string{
     let messageError = "";
-    if (this.Register.user === "") messageError += "El usuario no puede estar vacio\n";
-    if (this.Register.email === "") messageError += "El email no puede estar vacio\n";
-    if (this.Register.password === "") messageError += "La contraseña no puede estar vacia\n";
-    if (this.Register.passwordVerification === "") messageError += "La verificación de contraseña no puede estar vacia\n";
-    if (this.Register.password !== this.Register.passwordVerification) messageError += "Las contraseñas no coinciden\n";
+    if (Register.usuario === "") messageError += "El usuario no puede estar vacio\n";
+    if (Register.email === "") messageError += "El email no puede estar vacio\n";
+    if (Register.password === "") messageError += "La contraseña no puede estar vacia\n";
+    if (Register.passwordVerification === "") messageError += "La verificación de contraseña no puede estar vacia\n";
+    if (Register.password !== Register.passwordVerification) messageError += "Las contraseñas no coinciden\n";
     return messageError;
 
 
   }
 
-  register(){
+  register(Register: Register): void {
+    let messageError = this.handleErrors(Register);
+    if (messageError.length === 0){
+      this.registerserv.registerUser(Register).subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        }
+      })
+    }
+    else{
+      alert(messageError);
+    }
 
-  }
-
+}
 }

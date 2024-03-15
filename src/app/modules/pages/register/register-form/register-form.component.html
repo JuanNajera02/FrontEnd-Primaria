@@ -6,17 +6,17 @@
 
     <div class="contenedorLogin">
       <mat-form-field class="inputStyles">
-        <input matInput type="text" id="username" name="username" placeholder="Usuario" [(ngModel)]="Register.user" />
+        <input matInput type="text" id="username" name="username" placeholder="Usuario" [(ngModel)]="Register.usuario" />
       </mat-form-field>
 
       <mat-form-field class="inputStyles">
         <mat-label>Tipo de Usuario:</mat-label>
-        <mat-select id="rol" name="rol" [(ngModel)]="Register.role">
-          <mat-option value="DIRECTOR">Director</mat-option>
-          <mat-option value="ASISTENTE">Asistente</mat-option>
-          <mat-option value="TESORERO">Tesorero</mat-option>
-          <mat-option value="PRESIDENTE">Presidente</mat-option>
-          <mat-option value="SUPERVISOR">Supervisor</mat-option>
+        <mat-select id="rol" name="rol" [(ngModel)]="Register.idRol">
+          <mat-option value="1">Director</mat-option>
+          <mat-option value="2">Asistente</mat-option>
+          <mat-option value="3">Tesorero</mat-option>
+          <mat-option value="4">Presidente</mat-option>
+          <mat-option value="5">Supervisor</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -32,12 +32,13 @@
         <input class="inputStyles" matInput type="password" id="passwordVerification" name="passwordVerification" placeholder="Repetir contraseña" [(ngModel)]="Register.passwordVerification" />
       </mat-form-field>
 
-      <button type="submit" class="boton btn inputStyles" (click)="register()">Registrarse</button>
+      <button type="submit" class="boton btn inputStyles" (click)="register(Register)">Registrarse</button>
 
       <div class="registrarse inputStyles">
         <p>¿Ya tienes cuenta?</p>
         <a href="/login">Iniciar Sesión</a>
       </div>
+
 
       <div class="errorif" *ngIf="error">
         <p>{{ error }}</p>

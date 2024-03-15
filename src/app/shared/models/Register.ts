@@ -1,8 +1,8 @@
 import { Role } from './Role';
 
 export interface Register {
-  user: string;
-  role: Role;
+  usuario: string;
+  idRol: Role;
   email: string;
   password: string;
   passwordVerification: string;

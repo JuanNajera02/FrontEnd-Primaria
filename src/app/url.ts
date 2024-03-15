@@ -1,6 +1,6 @@
 
 
-export const URL = 'http://localhost:3000'; // URL de la API
+export const URL = 'http://localhost:8080'; // URL de la API
 
 
 
