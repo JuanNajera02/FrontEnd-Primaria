@@ -1,47 +1,67 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input,OnInit } from '@angular/core';
-import { ApexGrid, ColumnConfiguration } from 'apex-grid';
-ApexGrid.register();
+import { CommonModule } from '@angular/common';
+import {  Component, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
+interface Column {
+  key: string;
+  title: string;
+  sort?: boolean;
+}
 
 @Component({
   selector: 'app-report-table',
   standalone: true,
-  imports: [],
   templateUrl: './gridchart.component.html',
-  styleUrl: './gridchart.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  styleUrls: ['./gridchart.component.scss'],
+  imports: [CommonModule, FormsModule]
+
 })
 
-export class GridchartComponent implements OnInit{
-   
-  //Inputs para el componente
-  @Input() columns!: ColumnConfiguration<any, keyof any>[];
+export class GridchartComponent implements OnInit {
+  @Input() columns!: Column[];
   @Input() data!: any[];
 
-  constructor() { 
+  filteredData: any[] = [];
+  filterValue: string = '';
 
-  
-
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    console.log("columnas",this.columns);
-    console.log("data",this.data);
-
+    this.filteredData = this.data;
   }
 
-
-  ngOnChanges() {
-    // console.log('GridchartComponent', this.columns, this.data);
-    console.log("columnas",this.columns);
-    console.log("data",this.data);
-
-    if (this.columns.length > 0 && this.data.length === 0) {
-      let objeto: any = {};
-      this.columns.forEach((columna) => {
-        objeto[columna.key] = '';
-      });
-      this.data.push(objeto);
+  applyFilters(): void {
+    console.log("applyFilters",this.filterValue)
+    if (!this.filterValue) {
+      this.filteredData = this.data;
+      return;
     }
+  
+    this.filteredData = this.data.filter(item => {
+      for (const column of this.columns) {
+        const cellValue = item[column.key];
+        if (cellValue && cellValue.toString().toLowerCase().includes(this.filterValue.toLowerCase())) {
+          
+          return true;
+
+        }
+      }
+      return false;
+    });
+  }
+
+  // Método para generar y descargar el archivo Excel con los datos filtrados
+  exportToExcel(): void {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredData);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'reporte_filtrado.xlsx');
+  }
+  
+
+  clearFilters(): void {
+    this.filterValue = '';
+    this.applyFilters();
   }
 }

@@ -1,5 +1,22 @@
-    <apex-grid class="tabla" 
-    [columns]="columns" 
-    [data]="data"
-    >
-    </apex-grid>
+<div class="grid-container">
+    <input class="filter-input" type="text" placeholder="Filtrar por columna..." [(ngModel)]='filterValue' (input)="applyFilters()">
+    <button class="clear-filter-btn" (click)="clearFilters()">Limpiar Filtros</button>
+  
+    <table class="grid-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">{{ column.title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td *ngFor="let column of columns">{{ item[column.key] }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <button class="export-btn" (click)="exportToExcel()">Crear Reporte Excel</button>
+
+  </div>
+  
