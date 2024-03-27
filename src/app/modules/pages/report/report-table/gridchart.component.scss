@@ -36,7 +36,7 @@
 /* Estilo para la tabla */
 .grid-table {
   width: 100%;
-  
+
   // Añadido para que la tabla sea responsive
   overflow-x: auto;
 
@@ -52,7 +52,8 @@
   font-weight:bolder;
   cursor: pointer;
   border-radius: 10px;
-  font-size: 16px;   
+  font-size: 16px;
+  margin-right: 10px;
 }
 
 
@@ -84,4 +85,8 @@
 /* Estilo para las filas de datos cuando se pasa el mouse sobre ellas */
 .grid-table tbody tr:hover {
   background-color: #ddd;
+}
+.fecha-title{
+  margin-left: 10px;
+  margin-right: 10px;
 }

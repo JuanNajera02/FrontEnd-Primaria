@@ -61,4 +61,8 @@ export class NavBarComponent implements OnInit{
 
     this.route.navigate([], { queryParams });
   }
+
+  irConsultas() {
+    this.route.navigate(["/report"])
+  }
 }

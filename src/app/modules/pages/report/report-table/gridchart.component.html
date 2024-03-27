@@ -1,7 +1,15 @@
 <div class="grid-container">
+
+  <span>Fecha de inicio</span>
+  <input type="date" class="clear-filter-btn" [(ngModel)]="fechaInicio"/>
+
+  <span class="fecha-title">Fecha Final</span>
+
+  <input type="date" class="clear-filter-btn" [(ngModel)]="fechaFinal"/>
+
     <input class="filter-input" type="text" placeholder="Filtrar por columna..." [(ngModel)]='filterValue' (input)="applyFilters()">
     <button class="clear-filter-btn" (click)="clearFilters()">Limpiar Filtros</button>
-  
+
     <table class="grid-table">
       <thead>
         <tr>
@@ -9,6 +17,7 @@
         </tr>
       </thead>
       <tbody>
+
         <tr *ngFor="let item of filteredData">
           <td *ngFor="let column of columns">{{ item[column.key] }}</td>
         </tr>
@@ -16,7 +25,8 @@
       </tbody>
     </table>
 
+    <button type="button" class="export-btn" (click)="consultar()">Consultar</button>
+
     <button class="export-btn" (click)="exportToExcel()">Crear Reporte Excel</button>
 
   </div>
-  

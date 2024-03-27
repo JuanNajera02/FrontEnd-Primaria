@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {  Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
+import {MonetaryService} from "../../monetary-register/monetary.service";
 
 interface Column {
   key: string;
@@ -20,15 +21,15 @@ interface Column {
 
 export class GridchartComponent implements OnInit {
   @Input() columns!: Column[];
-  @Input() data!: any[];
-
+  data!: any[];
+  fechaInicio: Date = new Date();
+  fechaFinal: Date = new Date();
   filteredData: any[] = [];
   filterValue: string = '';
 
-  constructor() { }
+  constructor(private monetServ:MonetaryService) { }
 
   ngOnInit(): void {
-    this.filteredData = this.data;
   }
 
   applyFilters(): void {
@@ -37,12 +38,12 @@ export class GridchartComponent implements OnInit {
       this.filteredData = this.data;
       return;
     }
-  
+
     this.filteredData = this.data.filter(item => {
       for (const column of this.columns) {
         const cellValue = item[column.key];
         if (cellValue && cellValue.toString().toLowerCase().includes(this.filterValue.toLowerCase())) {
-          
+
           return true;
 
         }
@@ -58,10 +59,25 @@ export class GridchartComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'reporte_filtrado.xlsx');
   }
-  
+
 
   clearFilters(): void {
     this.filterValue = '';
     this.applyFilters();
+  }
+
+  consultar() {
+
+    if (this.fechaInicio > this.fechaFinal) {
+      alert('La fecha de inicio no puede ser mayor a la fecha final');
+      return;
+    }
+    // '2023-11-23','2024-02-08'
+    this.monetServ.getMovimientosByFechas(this.fechaInicio.toString(),this.fechaFinal.toString()).subscribe((movimientos)=> {
+      this.data = movimientos;
+      this.data.forEach((movimiento) => movimiento.fecha = new Date(movimiento.fecha).toLocaleDateString())
+      this.filteredData = this.data;
+    });
+
   }
 }

@@ -3,6 +3,7 @@ import { ReportSearchComponent } from '../report-search/report-search.component'
 import { ReportTitleComponent } from '../report-title/report-title.component';
 import { GridchartComponent } from '../report-table/gridchart.component';
 import {MonetaryService} from "../../monetary-register/monetary.service";
+import {Movimiento} from "../../monetary-register/Interfaces/MovimientoResponse";
 
 @Component({
   selector: 'app-report-form',
@@ -14,48 +15,48 @@ import {MonetaryService} from "../../monetary-register/monetary.service";
 export class ReportFormComponent implements OnInit{
 
   //datos de prueba
-  data = [
-    {
-      id: 1,
-      name: 'Leanne Graham'
-    },
-    {
-      id: 2,
-      name: 'Ervin Howell'
-    },
-    {
-      id: 3,
-      name: 'Clementine Bauch'
-    },
-    {
-      id: 4,
-      name: 'Patricia Lebsack'
-    },
-    {
-      id: 5,
-      name: 'Chelsey Dietrich'
-    }
-  ];
+  movimientos:Movimiento[] = []
+
+
 
   //columnas de prueba
   columns = [
     {
-      key: 'id',
-      title: 'ID',
-      sort: true
+      key:'tipoMovimiento',
+      title:'Tipo de movimiento'
     },
     {
-      key: 'name',
-      title: 'Nombre'
+      key:'persona',
+      title:'Persona'
+    },
+    {
+      key:'concepto',
+      title:'Concepto'
+    },
+    {
+      key:'importe',
+      title:'Importe'
+    },
+    {
+      key:'motivo',
+      title:'Motivo'
+    },
+    {
+      key:'clasificacion',
+      title:'Clasificación'
+    },
+    {
+      key:'fecha',
+      title:'Fecha'
     }
+
   ];
 
   constructor(private monetServ:MonetaryService) {}
 
   ngOnInit(){
-    this.monetServ.getMovimientosByFechas('2023-11-23','2024-02-08').subscribe((movimientos)=>{
-      console.log("movs",movimientos)
-    })
+
+
   }
 
 
