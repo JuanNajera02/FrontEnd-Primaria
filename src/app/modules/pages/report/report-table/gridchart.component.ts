@@ -3,6 +3,7 @@ import {  Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import {MonetaryService} from "../../monetary-register/monetary.service";
+import {ActivatedRoute} from "@angular/router";
 
 interface Column {
   key: string;
@@ -27,7 +28,7 @@ export class GridchartComponent implements OnInit {
   filteredData: any[] = [];
   filterValue: string = '';
 
-  constructor(private monetServ:MonetaryService) { }
+  constructor(private monetServ:MonetaryService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -72,8 +73,11 @@ export class GridchartComponent implements OnInit {
       alert('La fecha de inicio no puede ser mayor a la fecha final');
       return;
     }
-    // '2023-11-23','2024-02-08'
-    this.monetServ.getMovimientosByFechas(this.fechaInicio.toString(),this.fechaFinal.toString()).subscribe((movimientos)=> {
+
+    const idEscuela = this.route.snapshot.queryParams['idEscuela']
+
+
+    this.monetServ.getMovimientosByFechas(this.fechaInicio.toString(),this.fechaFinal.toString(),idEscuela).subscribe((movimientos)=> {
       this.data = movimientos;
       this.data.forEach((movimiento) => movimiento.fecha = new Date(movimiento.fecha).toLocaleDateString())
       this.filteredData = this.data;

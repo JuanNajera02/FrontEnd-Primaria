@@ -63,6 +63,13 @@ export class NavBarComponent implements OnInit{
   }
 
   irConsultas() {
-    this.route.navigate(["/report"])
+    // this.route.navigate(["/report"])
+    const idEscuela = this.routeActivated.snapshot.queryParams['idEscuela']
+    if(!idEscuela){
+      alert("Elige una escuela")
+      return
+    }
+    this.route.navigate(["/report"],{queryParams:{idEscuela}})
+
   }
 }
