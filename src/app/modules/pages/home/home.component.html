@@ -1,6 +1,35 @@
 <app-nav-bar></app-nav-bar>
+
+
 <div class="main">
+    <!--  Seperar en 3 secciones para mostrar informacion school-info ingresos-info egresos-info-->
+    <div class="school-info">
+        <h1>Información de la escuela</h1>
+<!--        <p>Nombre: {{ $school->name }}</p>-->
+<!--        <p>Dirección: {{ $school->address }}</p>-->
+<!--        <p>Telefono: {{ $school->phone }}</p>-->
+<!--        <p>Correo: {{ $school->email }}</p>-->
+    </div>
 
-
-
+  <div class="tab">
+    <button (click)="showIngresos()">Ingresos</button>
+    <button (click)="showEgresos()">Egresos</button>
   </div>
+
+  <!-- Sección de Ingresos -->
+  <section *ngIf="mostrarIngresos" class="ingresos">
+    <div class="ingresos-info">
+      <!-- Contenido de ingresos -->
+
+    </div>
+  </section>
+
+  <!-- Sección de Egresos -->
+  <section *ngIf="mostrarEgresos" class="egresos">
+    <div class="egresos-info">
+      <!-- Contenido de egresos -->
+    </div>
+  </section>
+
+
+</div>
