@@ -1,7 +1,11 @@
 <div class="monetary-form-container" >
     <app-monetary-title/>
     <form class="form-container">
-        <section class="section1">
+      <div class="input-movimiento">
+        <app-monetary-search (movimientoEvent)="receiveMovimiento($event)"/>
+      </div>
+
+      <section class="section1">
 
             <div class="input-container">
                 <h4>Tipo de movimiento</h4>
@@ -16,9 +20,6 @@
                 <input type="text"  [(ngModel)]="movimiento.persona" name="persona"/>
             </div>
 
-            <div class="input-container">
-                <app-monetary-search (movimientoEvent)="receiveMovimiento($event)"/>
-            </div>
 
         </section>
         <section class="section1">
