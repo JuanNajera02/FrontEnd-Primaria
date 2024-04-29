@@ -1,28 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { NavBarComponent } from '../../../core/header/nav-bar/nav-bar.component';
 import {CommonModule} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Movimiento} from "../monetary-register/Interfaces/MovimientoResponse";
 import {dateNow} from "igniteui-angular-core";
+import {ActivatedRoute} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import * as XLSX from "xlsx";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavBarComponent,CommonModule,],
+  imports: [NavBarComponent, CommonModule, ReactiveFormsModule,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+
+export class HomeComponent{
   //VARIABLES
   mostrarIngresos: boolean = true; // Mostrar sección de ingresos por defecto
   mostrarEgresos: boolean = false;
-  fechaInicio: string | undefined;
-  fechaFin: string | undefined;
-  idEscuela: string | undefined;
-  movimientos: string[] = [];
+  fechaInicio: string ;
+  fechaFin: string ;
+  idEscuela: string ;
 
+  //INFO
+  movimientos: any[] = [];
+  Escuela: any = {};
 
   //Objetos
   http: HttpClient;
@@ -37,26 +41,84 @@ export class HomeComponent implements OnInit{
     this.mostrarEgresos = true;
   }
 
-  ngOnInit() {
-    this.fechaInicio = "2021-01-01";
-    this.fechaFin = dateNow().toDateString();
-    this.idEscuela = "1";
-    this.showIngresos();
-    this.ObtenerMovimientos(this.fechaInicio, this.fechaFin, this.idEscuela);
-    console.log(this.movimientos);
-  }
-  constructor(http: HttpClient) {
+  constructor(private route: ActivatedRoute,http: HttpClient) {
     this.http = http;
+
+    this.fechaInicio = "2021-01-01";
+    //this.fechaFin = dateNow() con formato yyyy-mm-dd
+    this.fechaFin = dateNow().toISOString().split('T')[0];
+    this.showIngresos();
+    this.idEscuela = this.route.snapshot.queryParams['idEscuela'];
+    this.ObtenerMovimientos(this.fechaInicio, this.fechaFin, this.idEscuela);
+    this.ObtenerEscuela();
 
   }
 
   ObtenerMovimientos(fechaInicio:string,fechaFin:string,idEscuela:string){
-    //Consumir `http://localhost:8080/Movimientos/getReporte?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}} y guardarlo en this.movimientos
-    this.http.get<string[]>(`http://localhost:8080/Movimientos/generateReport?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`).subscribe((data) => {
+    const api: string = `http://localhost:8080/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
+
+    this.http.get<string[]>(api).subscribe((data) => {
       this.movimientos = data;
+      console.log(this.movimientos);
     });
 
   }
 
+  ObtenerEscuela(){
+    const api: string = `http://localhost:8080/escuelas/getEscuela?idEscuela=${this.idEscuela}`;
+
+    this.http.get<any>(api).subscribe((data) => {
+      this.Escuela = data;
+      console.log(this.Escuela);
+    });
+  }
+
+  calcularSumatoria(tipo: string): number {
+    let sumatoria = 0;
+    for (const key in this.movimientos) {
+      if (this.movimientos.hasOwnProperty(key)) {
+        const value = this.movimientos[key][tipo];
+        sumatoria += value;
+      }
+    }
+    return sumatoria;
+  }
+
+  buscar(){
+    this.idEscuela = this.route.snapshot.queryParams['idEscuela'];
+    this.ObtenerEscuela();
+    this.ObtenerMovimientos(this.fechaInicio, this.fechaFin, this.idEscuela);
+  }
+
+  exportar(){
+    // Crear un arreglo que combine los datos de movimientos y escuela
+    const data = [
+      [`FECHA INICIO ${this.fechaInicio} FECHA FIN ${this.fechaFin}`], // Rango de fechas
+      [], // Agregar una fila vacía para separar los conjuntos de datos
+      ["DATOS ESCUELA"], // Encabezado de la sección de escuela
+      [ ...Object.keys(this.Escuela)], // Nombres de las propiedades de la escuela
+      [...Object.values(this.Escuela)], // Valores de las propiedades de la escuela
+      [], // Agregar una fila vacía para separar los conjuntos de datos
+      ["Clasificacion", "Ingreso", "Egreso"], // Encabezado de la sección de movimientos
+      ...Object.entries(this.movimientos).map(([clasificacion, { ingreso, egreso }]) => [clasificacion, ingreso, egreso]),
+    ];
+    // Convertir el arreglo de arreglos a una hoja de cálculo de Excel
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+
+    // Crear un nuevo libro de trabajo de Excel
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+    // Agregar la hoja de cálculo al libro de trabajo
+    XLSX.utils.book_append_sheet(wb, ws, 'Datos');
+
+    // Guardar el libro de trabajo como un archivo Excel
+    XLSX.writeFile(wb, 'reporte_datos.xlsx');
+  }
+
+
+
+
+  protected readonly dateNow = dateNow;
 }
+
 

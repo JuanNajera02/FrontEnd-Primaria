@@ -1,16 +1,16 @@
 .form-container  {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);   
+    background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);
 }
 .monetary-form-container{
-    border: 1px solid black;
     width: 80%;
     margin:0 auto;
     padding: 20px;
     background-color: #fdf7ff;
     border-radius: 10px;
-    border: none;
+
 }
 
 .btn-registrar-movimiento{
@@ -26,14 +26,14 @@
     font-weight:bolder;
     cursor: pointer;
     border-radius: 10px;
-    font-size: 16px;   
+    font-size: 16px;
 }
 
 .input-container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    
+
 }
 .input-container input {
     border: none;

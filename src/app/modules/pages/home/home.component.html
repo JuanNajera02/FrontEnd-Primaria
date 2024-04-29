@@ -2,14 +2,45 @@
 
 
 <div class="main">
-    <!--  Seperar en 3 secciones para mostrar informacion school-info ingresos-info egresos-info-->
-    <div class="school-info">
-        <h1>Información de la escuela</h1>
-<!--        <p>Nombre: {{ $school->name }}</p>-->
-<!--        <p>Dirección: {{ $school->address }}</p>-->
-<!--        <p>Telefono: {{ $school->phone }}</p>-->
-<!--        <p>Correo: {{ $school->email }}</p>-->
+
+  <div class="search">
+    <div>
+      <span>Fecha de inicio</span>
+      <input type="date" class="clear-filter-btn" [(ngModel)]="fechaInicio"/>
     </div>
+    <div>
+      <span class="fecha-title">Fecha Final</span>
+      <input type="date" class="clear-filter-btn" [(ngModel)]="fechaFin"/>
+    </div>
+    <button (click)="buscar( )">Buscar</button>
+    <button (click)="exportar()">Exportar</button>
+
+
+  </div>
+
+    <!--  Seperar en 3 secciones para mostrar informacion school-info ingresos-info egresos-info-->
+  <div class="school-info">
+    <h1>ESCUELA</h1>
+    <div class="info-item">
+      <p><span>Nombre:</span> {{ Escuela.nombre }}</p>
+    </div>
+    <div class="info-item">
+      <p><span>Clave:</span> {{ Escuela.clave }}</p>
+    </div>
+    <div class="info-item">
+      <p><span>Localidad:</span> {{ Escuela.localidad }}</p>
+    </div>
+    <div class="info-item">
+      <p><span>Zona:</span> {{ Escuela.zona }}</p>
+    </div>
+    <div class="info-item">
+      <p><span>Sector:</span> {{ Escuela.sector }}</p>
+    </div>
+    <div class="info-item">
+      <p><span>Balance Actual:</span> {{ Escuela.balance | currency:'MXN':'symbol':'1.2-2' }}</p>
+    </div>
+  </div>
+
 
   <div class="tab">
     <button (click)="showIngresos()">Ingresos</button>
@@ -19,17 +50,37 @@
   <!-- Sección de Ingresos -->
   <section *ngIf="mostrarIngresos" class="ingresos">
     <div class="ingresos-info">
-      <!-- Contenido de ingresos -->
-
+      <h1>INGRESOS ECONOMICOS</h1>
+      <h2> Datos al Dia: {{fechaFin}}</h2>
+      <div class="info-item">
+        <p *ngFor="let item of movimientos | keyvalue">
+          <span>{{ item.key }}:</span> {{ item.value.ingreso | currency:'MXN':'symbol':'1.2-2' }}</p>
+      </div>
+      <div class="sum-item">
+        <p><span>TOTAL INGRESOS:</span> {{ calcularSumatoria('ingreso') | currency:'MXN':'symbol':'1.2-2' }}</p>
+      </div>
     </div>
   </section>
 
   <!-- Sección de Egresos -->
   <section *ngIf="mostrarEgresos" class="egresos">
     <div class="egresos-info">
+      <h1>EGRESOS REGISTRADOS</h1>
+      <h2> Datos al Dia: {{fechaFin}}</h2>
+
       <!-- Contenido de egresos -->
+      <div class="info-item">
+        <p *ngFor="let item of movimientos | keyvalue">
+          <span>{{ item.key }}:</span> {{ item.value.egreso | currency:'MXN':'symbol':'1.2-2' }}
+        </p>
+      </div>
+
+      <div class="sum-item">
+        <p><span>TOTAL EGRESOS:</span> {{ calcularSumatoria('egreso') | currency:'MXN':'symbol':'1.2-2' }}</p>
+      </div>
     </div>
   </section>
+
 
 
 </div>
