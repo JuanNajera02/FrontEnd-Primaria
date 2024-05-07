@@ -1,60 +1,80 @@
-.form-container  {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);   
-}
-.monetary-form-container{
-    border: 1px solid black;
-    width: 80%;
-    margin:0 auto;
-    padding: 20px;
-    background-color: #fdf7ff;
-    border-radius: 10px;
-    border: none;
+.form-container {
+  background: linear-gradient(to right bottom, #845ec2, #a782d0, #c7a7de, #e3ceee, #fdf7ff);
+  width: 100%;
+  height: 100%;
+  min-height: 60vh;
+  padding: 20px;
 }
 
-.btn-registrar-movimiento{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+.monetary-form-container {
+  border: 1px solid black;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fdf7ff;
+  border-radius: 10px;
+  border: none;
 }
-.btn-registrar-movimiento button{
-    color: #c471ed;
-    background-color: beige;
-    padding: 12px;
-    border: none;
-    font-weight:bolder;
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 16px;   
+
+.btn-registrar-movimiento {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.btn-registrar-movimiento button {
+  color: #c471ed;
+  background-color: beige;
+  padding: 12px;
+  border: none;
+  font-weight: bolder;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
 .input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    
-}
-.input-container input {
-    border: none;
-    border-radius: 10px;
-    padding: 5px;
-}
-.input-container select {
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .input-container h4 {
-    margin-right: 10px;
-    margin-left: 20px;
+  margin-right: 20px; /* Espacio adicional */
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  width: 150px; /* Ancho fijo para el título */
+  flex-shrink: 0; /* Evita que el título se contraiga */
 }
-.section1{
-    display: flex;
 
+.input-container input,
+.input-container select {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: right; /* Centra el texto a la derecha */
 }
-.section1 h4{
-    color: #fff;
-    font-weight: lighter;
+
+.section1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Alinea los campos al final de cada fila */
+}
+
+.section1 h4 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.input-movimiento {
+  padding: 20px;
+  background: #bba2c7;
+  width: 40%;
+  border-radius: 10px;
+  margin-bottom: 40px;
 }

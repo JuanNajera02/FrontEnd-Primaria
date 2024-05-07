@@ -161,4 +161,10 @@ export class NavBarComponent implements OnInit{
     this.route.navigate(["/report"],{queryParams:{idEscuela}})
 
   }
+
+  irHome() {
+    // this.route.navigate(["/home"])
+    const idEscuela = this.routeActivated.snapshot.queryParams['idEscuela']
+    this.route.navigate(["/home"],{queryParams:{idEscuela}})
+  }
 }
