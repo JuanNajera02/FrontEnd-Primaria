@@ -87,5 +87,16 @@
 }
 
 
-
+.contenedor-escuelas2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: aliceblue;
+  width: 350px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  gap: 5px;
+}
 

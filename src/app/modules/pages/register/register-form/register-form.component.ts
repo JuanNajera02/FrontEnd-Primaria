@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterService } from '../register.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
 export class RegisterFormComponent {
 
 
-  constructor(private registerserv: RegisterService ,private route:ActivatedRoute) {}
+  constructor(private registerserv: RegisterService ,private route:ActivatedRoute, private router: Router) {}
 
 
   Register: Register = {
@@ -50,13 +51,17 @@ export class RegisterFormComponent {
       this.registerserv.registerUser(Register).subscribe({
         next: (data) => {
           console.log(data);
+          alert('Usuario registrado con éxito');
+          this.router.navigate(["/home"]);
         },
         error: (error) => {
           console.error('There was an error!', error);
+          error = this.error;
         }
       })
     }
     else{
+    //  this.error = messageError
       alert(messageError);
     }
 

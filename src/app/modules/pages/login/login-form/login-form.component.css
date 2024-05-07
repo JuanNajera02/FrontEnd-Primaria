@@ -6,7 +6,7 @@
   background-color: #FDF7FF;
   width: 100%;
   border-radius: 40px;
-  height: 95%;
+  height: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
 }
 
@@ -85,6 +85,7 @@ img {
 .registrarse a {
   color: #080708;
   text-decoration: none;
+  margin-top: 0px;
   font-weight: 500;
 }
 

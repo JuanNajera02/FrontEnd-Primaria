@@ -11,7 +11,7 @@
   <div class="contenedor-3forms">
 
     <div class="contendor-btn">
-      <button class="btn-navbar">Inicio</button>
+      <button (click)="goHome()" class="btn-navbar">Inicio</button>
     </div>
 
     <div class="contendor-btn">
@@ -46,8 +46,24 @@
       </select>
     </div>
 
-
   </div>
+
+
+  <div class="contenedor-escuelas2" *ngIf="mostrarAsignarEscuela()">
+    <div class="contendor-btn">
+      <select class="btn-navbar" [(ngModel)]="selectedId">
+        @for (id of idEscuelas;track id){
+        <option [value]="id">{{ id }}</option>
+        }
+      </select>
+    </div>
+    <button (click)="asignarEscuela(selectedId)" class="btn-navbar">Asignar Escuela</button>
+  </div>
+
+
+
+
+
 
   <div class="contenedor-salir">
     <div class="contendor-btn">
