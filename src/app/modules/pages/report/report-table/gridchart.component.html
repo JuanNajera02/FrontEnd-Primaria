@@ -7,8 +7,7 @@
 
   <input type="date" class="clear-filter-btn" [(ngModel)]="fechaFinal"/>
 
-    <input class="filter-input" type="text" placeholder="Filtrar por columna..." [(ngModel)]='filterValue' (input)="applyFilters()">
-    <button class="clear-filter-btn" (click)="clearFilters()">Limpiar Filtros</button>
+    <input class="filter-input" type="text" placeholder="Buscar por..." [(ngModel)]='filterValue' (input)="applyFilters()">
 
     <table class="grid-table">
       <thead>
