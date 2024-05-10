@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {MonetarySearchComponent} from "../../monetary-register/monetary-search/monetary-search.component";
 import {MonetaryTitleComponent} from "../../monetary-register/monetary-title/monetary-title.component";
@@ -6,23 +6,31 @@ import {School} from "../School";
 import {SchoolTitleComponent} from "../school-title/school-title.component";
 import {SchoolSearchComponent} from "../school-search/school-search.component";
 import {SchoolService} from "../school.service";
+import { AssignedSchoolsListComponent } from "../assigned-schools-list/assigned-schools-list.component";
 
 @Component({
-  selector: 'app-school-form',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MonetarySearchComponent,
-    MonetaryTitleComponent,
-    SchoolTitleComponent,
-    SchoolSearchComponent
-  ],
-  templateUrl: './school-form.component.html',
-  styleUrl: './school-form.component.css'
+    selector: 'app-school-form',
+    standalone: true,
+    templateUrl: './school-form.component.html',
+    styleUrl: './school-form.component.css',
+    imports: [
+        FormsModule,
+        MonetarySearchComponent,
+        MonetaryTitleComponent,
+        SchoolTitleComponent,
+        SchoolSearchComponent,
+        AssignedSchoolsListComponent
+    ]
 })
-export class SchoolFormComponent {
+export class SchoolFormComponent implements OnInit{
 
   constructor(private schoolServ:SchoolService) {}
+  
+  ngOnInit(): void {
+    this.getEscuelas()
+  }
+
+  escuelasAsignadas:School[] = []
   escuela:School = {
     clave: "",
     id: '',
@@ -31,6 +39,16 @@ export class SchoolFormComponent {
     zona: '',
     localidad: ''
   }
+
+  getEscuelas(){
+    const username:string = JSON.parse(localStorage.getItem("usuarioPrimaria") as string).usuario
+
+    this.schoolServ.getEscuelas(username).subscribe({ 
+      next:(schools) => this.escuelasAsignadas = schools,
+      error: (err) => console.log(err.message)
+    })
+  }
+
   handleErrors():string{
     let errorMessage = ""
     if (this.escuela.clave === "") errorMessage += "Clave no puede estar vacia\n"

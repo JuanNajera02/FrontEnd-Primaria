@@ -38,6 +38,10 @@ export class SchoolService {
       }
     });
   }
+  desAsignarEscuela(idUsuario:string,idEscuela: string): Observable<any> {
+    // /asignacionEscuela/deleteAsignacionEscuela?idEscuela=9&idUsuario=2
+    return this.http.delete(`${this.url}/asignacionEscuela/deleteAsignacionEscuela?idEscuela=${idEscuela}&idUsuario=${idUsuario}`)
+  }
 
   //http://localhost:8080/asignacionEscuela/getAsignacionEscuela?username=1
   getAsignacionEscuela(username:string):Observable<any>{

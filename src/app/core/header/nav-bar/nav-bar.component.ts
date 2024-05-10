@@ -41,7 +41,6 @@ export class NavBarComponent implements OnInit{
   }
   hasIdEscuela():boolean{
     const params = this.routeActivated.snapshot.queryParams
-    console.log("params",params)
     return params.hasOwnProperty('idEscuela') && params['idEscuela'] !== ''
   }
   onSelectedRegister(event:any){
@@ -83,7 +82,6 @@ export class NavBarComponent implements OnInit{
     //getAsignacionEscuela
     this.schoolServ.getAsignacionEscuela(username).subscribe({
       next:(response) => {
-        console.log("response",response)
         this.CantidadEscuelas = response
 
       },
@@ -104,7 +102,6 @@ export class NavBarComponent implements OnInit{
       next:(schools) => this.escuelas = schools,
       error: (err) => console.log(err.message)
     })
-    console.log("escuelas",this.escuelas);
   }
 
 
@@ -112,10 +109,8 @@ export class NavBarComponent implements OnInit{
     this.schoolServ.getAllEscuelas().subscribe({
       next: (schools) => {
         this.AllEscuelas = schools;
-        console.log("AllEscuelas", this.AllEscuelas);
         // Obtener los IDs y asignarlos al arreglo idEscuelas
         this.idEscuelas = this.AllEscuelas.map((escuela) => parseInt(escuela.id, 10)); // O parseInt(escuela.id)
-        console.log("idEscuelas", this.idEscuelas);
       },
       error: (err) => console.log(err.message)
     });
@@ -124,12 +119,9 @@ export class NavBarComponent implements OnInit{
   asignarEscuela(escuelaID: number){
     const id_usuario:string = JSON.parse(localStorage.getItem("usuarioPrimaria") as string).idUsuario
 
-    console.log ("id_usuario",id_usuario)
-    console.log("escuelaID",escuelaID)
 
     this.schoolServ.asignarEscuela(id_usuario, escuelaID.toString()).subscribe({
       next: (response) => {
-        console.log("Asignación exitosa", response);
         alert("Escuela asignada correctamente");
         this.getEscuelas();
       },

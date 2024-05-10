@@ -1,4 +1,4 @@
-
+/* 
 .monetary-search{
   display: flex;
   margin-left: 15px;
@@ -26,4 +26,14 @@
 h4 {
   margin-right: 10px;
   margin-left: 20px;
+} */
+.btn-buscar-escuela{
+  background-color: #c471ed;
+  color: white;
+  border: none;
+  padding: 8px 20px; /* Ajusta el relleno del botón según sea necesario */
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
 }

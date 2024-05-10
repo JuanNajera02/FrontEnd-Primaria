@@ -78,3 +78,9 @@
   border-radius: 10px;
   margin-bottom: 40px;
 }
+
+.separador{
+  display: flex;
+  /* space between */
+  justify-content: space-between;
+}

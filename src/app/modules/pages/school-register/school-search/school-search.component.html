@@ -1,6 +1,9 @@
 <div class="monetary-search">
-
-  <h4>ID</h4>
-  <input type="number" [(ngModel)]="idEscuela">
-  <button (click)="buscarEscuela()">Buscar</button>
+  <mat-form-field >
+      <mat-label>Selecciona una escuela</mat-label>
+      <mat-select [(ngModel)]="idEscuela" (selectionChange)="onSchoolSelectionChange()">
+          <mat-option *ngFor="let escuela of allEscuelas" [value]="escuela.id">{{ escuela.nombre }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button class="btn-buscar-escuela" (click)="asignarEscuela()" >asignarme</button>
 </div>

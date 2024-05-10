@@ -3,30 +3,38 @@
   <form class="form-container">
 
     <div class="input-escuela">
-      <h4>Buscar escuela:</h4>
       <app-school-search class="buscador" (escuelaEvent)="receiveEscuela($event)"/>
     </div>
+
+    <div class="separador">
+      <div class="registro-escuelas">
+        
     <section class="section1">
       <div class="input-container">
         <h4>Clave de la escuela:</h4>
         <input type="text" [(ngModel)]="escuela.clave" name="clave"/>
       </div>
+    </section>
 
-
+    <section class="section1">    
       <div class="input-container">
         <h4>Localidad: </h4>
         <input type="text" [(ngModel)]="escuela.localidad" name="localidad"/>
       </div>
+    </section>
 
+    <section class="section1">
+      <div class="input-container">
+        <h4>Zona: </h4>
+        <input type="text" [(ngModel)]="escuela.zona" name="zona"/>
+      </div>
+    </section>
+    <section class="section1">
       <div class="input-container">
         <h4>Sector:</h4>
         <input type="text" [(ngModel)]="escuela.sector" name="sector"/>
       </div>
 
-      <div class="input-container">
-        <h4>Zona: </h4>
-        <input type="text" [(ngModel)]="escuela.zona" name="zona"/>
-      </div>
     </section>
 
     <section class="section1">
@@ -42,6 +50,14 @@
 
       <button (click)="registrarEscuela()">Registrar Escuela</button>
     </section>
+
+
+      </div>
+      <div class="escuelas-asignadas">
+        <app-assigned-schools-list [escuelasAsignadas]="escuelasAsignadas" />
+      </div>
+    </div>
+
 
   </form>
 
