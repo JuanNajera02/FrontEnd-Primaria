@@ -50,7 +50,7 @@
   </div>
 
 
-  <div class="contenedor-escuelas2" *ngIf="mostrarAsignarEscuela()">
+  <!-- <div class="contenedor-escuelas2" *ngIf="mostrarAsignarEscuela()">
     <div class="contendor-btn">
       <select class="btn-navbar" [(ngModel)]="selectedId">
         @for (id of idEscuelas;track id){
@@ -59,6 +59,13 @@
       </select>
     </div>
     <button (click)="asignarEscuela(selectedId)" class="btn-navbar">Asignar Escuela</button>
+  </div> -->
+
+<div class="contenedor-escuelas2" *ngIf="mostrarAsignarEscuela()">
+    <div class="contendor-btn">
+    <!-- haz un boton que se llame crear usuarios -->
+  <button (click)="crearUsuarios()" class="btn-navbar">Crear Usuarios</button>
+    </div>
   </div>
 
 

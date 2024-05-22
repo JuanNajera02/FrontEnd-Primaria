@@ -57,18 +57,11 @@ export class NavBarComponent implements OnInit{
   }
 
   mostrarAsignarEscuela(): boolean {
-    if (this.Rol === 'Director' && this.CantidadEscuelas < 2) {
+    if (this.Rol === 'Supervisor' ) {
       return true;
-    } else if (
-      this.Rol === 'Asistente' ||
-      this.Rol === 'Tesorero' ||
-      this.Rol === 'Presidente'
-    ) {
-      return this.CantidadEscuelas < 1;
-    } else if (this.Rol === 'Supervisor') {
-      return true; // Mostrar siempre para Supervisor
+    } else{
+    return false;
     }
-    return false; // Ocultar por defecto para otros roles no mencionados
   }
 
 
@@ -87,6 +80,10 @@ export class NavBarComponent implements OnInit{
       },
       error: (err) => console.log(err.message)
     })
+  }
+
+  crearUsuarios(){
+    this.route.navigate(["/register"])
   }
 
 

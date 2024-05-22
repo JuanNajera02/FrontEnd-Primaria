@@ -9,15 +9,6 @@
         <input matInput type="text" id="username" name="username" placeholder="Usuario" [(ngModel)]="Register.usuario" />
       </mat-form-field>
 
-      <mat-form-field class="inputStyles">
-        <mat-label>Tipo de Usuario:</mat-label>
-        <mat-select id="rol" name="rol" [(ngModel)]="Register.idRol">
-          <mat-option value="1">Director</mat-option>
-          <mat-option value="2">Asistente</mat-option>
-          <mat-option value="3">Tesorero</mat-option>
-          <mat-option value="4">Presidente</mat-option>
-        </mat-select>
-      </mat-form-field>
 
       <mat-form-field class="inputStyles">
         <input matInput type="email" id="email" name="email" placeholder="Email" [(ngModel)]="Register.email" />
@@ -31,13 +22,13 @@
         <input class="inputStyles" matInput type="password" id="passwordVerification" name="passwordVerification" placeholder="Repetir contraseña" [(ngModel)]="Register.passwordVerification" />
       </mat-form-field>
 
-      <div class="divBotones">
+      <button type="submit" class="boton btn inputStyles" (click)="register(Register)">Registrarse</button>
 
-      <button type="submit" class="boton btn inputStyles" (click)="register(Register)">Registrar Usuario</button>
+      <div class="registrarse inputStyles">
+        <p>¿Ya tienes cuenta?</p>
+        <a href="/login">Iniciar Sesión</a>
+      </div>
 
-      <button  class="boton btn inputStyles" (click)="regresar()">Regresar</button>
-
-    </div>
 
       <div class="errorif" *ngIf="error">
         <p>{{ error }}</p>

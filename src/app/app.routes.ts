@@ -6,6 +6,7 @@ import { ReportComponent } from './modules/pages/report/report.component';
 import { HomeComponent } from './modules/pages/home/home.component';
 import {authenticateGuard} from "./core/guards/authenticate.guard";
 import {SchoolRegisterComponent} from "./modules/pages/school-register/school-register.component";
+import {SupervisorRegisterComponent} from "./modules/pages/supervisor-register/supervisor-register.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'report', component: ReportComponent},
   { path: 'home', component: HomeComponent,canActivate:[authenticateGuard]},
-  { path:'escuelas',component:SchoolRegisterComponent,canActivate:[authenticateGuard]}
+  { path:'escuelas',component:SchoolRegisterComponent,canActivate:[authenticateGuard]},
+  { path:'registrarSupervisor',component:SupervisorRegisterComponent}
 ];
