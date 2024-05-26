@@ -1,6 +1,15 @@
 <div class="monetary-search">
 
-    <h4>ID</h4>
-    <input type="number" [(ngModel)]="idMovimiento">
-    <button (click)="buscarMovimiento()">Buscar</button>
+    <div>
+        <h4>ID</h4>
+        <input type="number" [(ngModel)]="idMovimiento">
+        <button (click)="buscarMovimiento()">Buscar</button>    
+    </div>
+    
+    <div *ngIf="isSupervisor">
+        <h4>Clasificacion</h4>
+        <input type="text" [(ngModel)]="nuevaClasificacion">
+        <button (click)="crearClasificacion()">Crear</button>
+
+    </div>
 </div>
