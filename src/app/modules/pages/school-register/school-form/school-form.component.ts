@@ -7,6 +7,7 @@ import {SchoolTitleComponent} from "../school-title/school-title.component";
 import {SchoolSearchComponent} from "../school-search/school-search.component";
 import {SchoolService} from "../school.service";
 import { AssignedSchoolsListComponent } from "../assigned-schools-list/assigned-schools-list.component";
+import { UserService } from '../User.service';
 
 @Component({
     selector: 'app-school-form',

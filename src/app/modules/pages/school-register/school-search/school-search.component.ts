@@ -7,7 +7,7 @@ import {School} from "../School";
 import {ActivatedRoute} from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
-
+import {UserService} from "../User.service";
 @Component({
   selector: 'app-school-search',
   standalone: true,
@@ -26,11 +26,26 @@ export class SchoolSearchComponent implements OnInit {
 
   allEscuelas: School[] = []
   @Output() escuelaEvent = new EventEmitter<School>
-  constructor(private escuelaServ:SchoolService,private routeActivated:ActivatedRoute) {}
+
+  idUsuario:string = ""
+
+
+  constructor(private escuelaServ:SchoolService,private routeActivated:ActivatedRoute,private usersServ:UserService) {}
 
   ngOnInit(): void {
     this.obtenerTodasEscuelas()
+    this.getUsers()
   }
+
+  usuarios:any[] = []
+
+  getUsers() {
+    this.usersServ.getUsers().subscribe({
+      next: (users) => this.usuarios = users,
+      error: (err) => console.log(err.message)
+    })
+  }
+
   obtenerTodasEscuelas(){
     this.escuelaServ.getAllEscuelas().subscribe({
       next: (escuelas) => this.allEscuelas = escuelas,
@@ -45,12 +60,12 @@ export class SchoolSearchComponent implements OnInit {
   }
 
   asignarEscuela() {
-      const id_usuario:string = JSON.parse(localStorage.getItem("usuarioPrimaria") as string).idUsuario
-
-      this.escuelaServ.asignarEscuela(id_usuario, this.idEscuela).subscribe({
+      
+      this.escuelaServ.asignarEscuela(this.idUsuario, this.idEscuela).subscribe({
         next: (response) => {
+          this.idEscuela = ""
+          this.idUsuario = ""    
           alert("Escuela asignada correctamente")
-          console.log(response)
         },
         error: (error) => alert(error.message)
       })
@@ -58,10 +73,6 @@ export class SchoolSearchComponent implements OnInit {
 
   
   onSchoolSelectionChange() {
-    if(!this.hasIdEscuela()){
-      alert("Seleccione una escuela")
-      return
-    }
     if (Number.parseInt(this.idEscuela) < 0) return;
     this.escuelaServ.getEscuela(this.idEscuela).subscribe({
       next : (escuela) => this.escuelaEvent.emit(escuela),
