@@ -18,7 +18,7 @@
     <div class="contendor-btn">
       <select [(ngModel)]="selectedValueRegister" (change)="onSelectedRegister($event)"  class="btn-navbar" name="registrar">
         <option selected disabled>Registrar</option>
-        <option value="escuelas">Escuelas</option>
+        <option *ngIf="isSupervisor" value="escuelas">Escuelas</option>
         <option value="movimientos">Movimientos</option>
       </select>
 <!--      <button  class="btn-navbar">Registrar</button>-->

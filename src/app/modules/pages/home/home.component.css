@@ -49,18 +49,17 @@
   display: flex;
   justify-content: center;
   margin-left: 10px;
+
 }
 
 .tab button {
   background-color: #f2f2f2;
   border: none;
-  outline: none;
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
   border-radius: 10px 10px 0 0;
   width: 150px;
-
 }
 
 .tab button:hover {
@@ -78,6 +77,13 @@
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: none; /* Ocultar el contenido */
+}
+
+.contenedor1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 /* Mostrar el contenido activo */

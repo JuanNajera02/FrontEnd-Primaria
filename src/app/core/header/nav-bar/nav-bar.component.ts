@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit{
   selectedId: number = 1 // Declaración de la propiedad selectedId
   Rol: string = "Rol"
   CantidadEscuelas: number = 0
-
+  isSupervisor: boolean = false;
 
   constructor(private route:Router,private schoolServ:SchoolService,private routeActivated:ActivatedRoute) {
   }
@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit{
     this.getAllEscuelas()
 
     this.Rol = this.obtenerRol();
-
+    this.isSupervisor = this.Rol === 'Supervisor';
     this.obtenerCantidadEscuelas();
 
 
