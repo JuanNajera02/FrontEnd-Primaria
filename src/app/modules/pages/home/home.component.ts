@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { NavBarComponent } from '../../../core/header/nav-bar/nav-bar.component';
+import {NavBarComponent } from '../../../core/header/nav-bar/nav-bar.component';
 import {CommonModule} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
@@ -54,7 +54,7 @@ export class HomeComponent{
   }
 
   ObtenerMovimientos(fechaInicio:string,fechaFin:string,idEscuela:string){
-    const api: string = `http://localhost:8080/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
+    const api: string = `http://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
 
     this.http.get<string[]>(api).subscribe((data) => {
       this.movimientos = data;
@@ -64,7 +64,7 @@ export class HomeComponent{
   }
 
   ObtenerEscuela(){
-    const api: string = `http://localhost:8080/escuelas/getEscuela?idEscuela=${this.idEscuela}`;
+    const api: string = `http://ingresosegresosback-production.up.railway.app/escuelas/getEscuela?idEscuela=${this.idEscuela}`;
 
     this.http.get<any>(api).subscribe((data) => {
       this.Escuela = data;

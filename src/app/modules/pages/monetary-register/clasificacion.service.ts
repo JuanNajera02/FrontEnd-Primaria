@@ -10,7 +10,7 @@ export class ClasificacionService {
 
 
     
-  url:string = "http://localhost:8080"
+  url:string = "http://ingresosegresosback-production.up.railway.app"
   constructor(private http:HttpClient) { }
 
   crearClasificacion(newClasificacion:string):Observable<any>{

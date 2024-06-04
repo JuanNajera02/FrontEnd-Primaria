@@ -47,6 +47,7 @@ export class SupervisorFormComponent {
   register(Register: Register2): void {
     let messageError = this.handleErrors(Register);
     if (messageError.length === 0){
+      // console.log(Register);
       this.registerserv.registerUser(Register).subscribe({
         next: (data) => {
           console.log(data);

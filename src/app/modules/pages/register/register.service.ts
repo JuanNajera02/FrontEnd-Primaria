@@ -13,6 +13,8 @@ export class RegisterService {
 
 
   registerUser(user:any):Observable<any>{
+    // IMprimir el post
+    console.log("user",user)
     return this.http.post(`${URL}/auth/register`,user)
   }
 

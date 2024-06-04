@@ -8,10 +8,13 @@ import {Credential} from "./models/Credential";
 })
 export class AuthenticationService {
 
-  url:string = "http://localhost:8080"
+  // url:string = "http://ingresosegresosback-production.up.railway.app"
+  url:string = "https://ingresosegresosback-production.up.railway.app"
+  
   constructor(private http:HttpClient) { }
 
   signIn(cred:Credential):Observable<any>{
+      console.log("cred",cred)
       return this.http.post(`${this.url}/auth/authenticate`,cred)
   }
   //TODO
