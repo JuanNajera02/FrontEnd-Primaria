@@ -9,7 +9,7 @@ import {AddMovimientoReq} from "./Interfaces/AddMovimientoReq";
 })
 export class MonetaryService {
 
-  url:string = "http://ingresosegresosback-production.up.railway.app"
+  url:string = "https://ingresosegresosback-production.up.railway.app"
   constructor(private http:HttpClient) { }
 
   getMovimiento(idMovimiento:string,idEscuela:string):Observable<Movimiento>{

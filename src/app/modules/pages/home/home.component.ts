@@ -54,7 +54,7 @@ export class HomeComponent{
   }
 
   ObtenerMovimientos(fechaInicio:string,fechaFin:string,idEscuela:string){
-    const api: string = `http://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
+    const api: string = `https://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
 
     this.http.get<string[]>(api).subscribe((data) => {
       this.movimientos = data;
@@ -64,7 +64,7 @@ export class HomeComponent{
   }
 
   ObtenerEscuela(){
-    const api: string = `http://ingresosegresosback-production.up.railway.app/escuelas/getEscuela?idEscuela=${this.idEscuela}`;
+    const api: string = `https://ingresosegresosback-production.up.railway.app/escuelas/getEscuela?idEscuela=${this.idEscuela}`;
 
     this.http.get<any>(api).subscribe((data) => {
       this.Escuela = data;

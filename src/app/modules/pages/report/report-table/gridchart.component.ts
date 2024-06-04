@@ -73,7 +73,7 @@ export class GridchartComponent implements OnInit {
   }
   // Método para obtener los movimientos
   ObtenerMovimientos(fechaInicio: string, fechaFin: string, idEscuela: string): void {
-    const api: string = `http://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
+    const api: string = `https://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
     this.http.get<any[]>(api).subscribe((data) => {
       this.movimientos = data;
       console.log(this.movimientos);
@@ -81,7 +81,7 @@ export class GridchartComponent implements OnInit {
   }
   // Método para obtener los datos de la escuela
   ObtenerEscuela(idEscuela: string): void {
-    const api: string = `http://ingresosegresosback-production.up.railway.app/escuelas/getEscuela?idEscuela=${idEscuela}`;
+    const api: string = `https://ingresosegresosback-production.up.railway.app/escuelas/getEscuela?idEscuela=${idEscuela}`;
     this.http.get<any>(api).subscribe((data) => {
       this.Escuela = data;
       console.log(this.Escuela);

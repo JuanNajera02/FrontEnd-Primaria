@@ -9,7 +9,7 @@ import {School} from "./School";
 })
 export class SchoolService {
 
-  // url:string = "http://ingresosegresosback-production.up.railway.app"
+  // url:string = "https://ingresosegresosback-production.up.railway.app"
   url:string = "https://ingresosegresosback-production.up.railway.app"
   constructor(private http:HttpClient) { }
 
@@ -44,7 +44,7 @@ export class SchoolService {
     return this.http.delete(`${this.url}/asignacionEscuela/deleteAsignacionEscuela?idEscuela=${idEscuela}&idUsuario=${idUsuario}`)
   }
 
-  //http://ingresosegresosback-production.up.railway.app/asignacionEscuela/getAsignacionEscuela?username=1
+  //https://ingresosegresosback-production.up.railway.app/asignacionEscuela/getAsignacionEscuela?username=1
   getAsignacionEscuela(username:string):Observable<any>{
     return this.http.get(`${this.url}/asignacionEscuela/getAsignacionEscuela?username=${username}`)
   }
