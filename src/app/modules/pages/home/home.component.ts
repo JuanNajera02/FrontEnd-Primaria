@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import { NavBarComponent } from '../../../core/header/nav-bar/nav-bar.component';
 import {CommonModule} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
-import {dateNow} from "igniteui-angular-core";
 import {ActivatedRoute} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import * as XLSX from "xlsx";
@@ -46,7 +45,7 @@ export class HomeComponent{
 
     this.fechaInicio = "2021-01-01";
     //this.fechaFin = dateNow() con formato yyyy-mm-dd
-    this.fechaFin = dateNow().toISOString().split('T')[0];
+    this.fechaFin = new Date().toISOString().split('T')[0];
     this.showIngresos();
     this.idEscuela = this.route.snapshot.queryParams['idEscuela'];
     this.ObtenerMovimientos(this.fechaInicio, this.fechaFin, this.idEscuela);
@@ -116,9 +115,6 @@ export class HomeComponent{
   }
 
 
-
-
-  protected readonly dateNow = dateNow;
 }
 
 
