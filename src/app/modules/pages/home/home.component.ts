@@ -55,7 +55,7 @@ export class HomeComponent {
   ObtenerMovimientos(fechaInicio:string,fechaFin:string,idEscuela:string){
     const api: string = `https://ingresosegresosback-production.up.railway.app/Movimientos/ingresosEgresosPorClasificacion?fechaInicio=${fechaInicio}&fechaFinal=${fechaFin}&idEscuela=${idEscuela}`;
 
-    this.http.get<any[]>(api).subscribe((data) => {
+    this.http.get<string[]>(api).subscribe((data) => {
       this.movimientos = data;
       console.log(this.movimientos);
     });
@@ -72,9 +72,10 @@ export class HomeComponent {
 
   calcularSumatoria(tipo: string): number {
     let sumatoria = 0;
-    for (const movimiento of this.movimientos) {
-      if (movimiento.tipo === tipo) {
-        sumatoria += movimiento.value;
+    for (const key in this.movimientos) {
+      if (this.movimientos.hasOwnProperty(key)) {
+        const value = this.movimientos[key][tipo];
+        sumatoria += value;
       }
     }
     return sumatoria;
@@ -89,14 +90,14 @@ export class HomeComponent {
   exportar() {
     // Crear un arreglo que combine los datos de movimientos y escuela
     const data = [
-      [`FECHA INICIO: ${this.fechaInicio} FECHA FIN: ${this.fechaFin}`], // Rango de fechas
+      [`FECHA INICIO ${this.fechaInicio} FECHA FIN ${this.fechaFin}`], // Rango de fechas
       [], // Agregar una fila vacía para separar los conjuntos de datos
       ["DATOS ESCUELA"], // Encabezado de la sección de escuela
       [ ...Object.keys(this.Escuela)], // Nombres de las propiedades de la escuela
       [...Object.values(this.Escuela)], // Valores de las propiedades de la escuela
       [], // Agregar una fila vacía para separar los conjuntos de datos
-      ["Clasificación", "Ingreso", "Egreso"], // Encabezado de la sección de movimientos
-      ...this.movimientos.map(movimiento => [movimiento.clasificacion, movimiento.ingreso, movimiento.egreso]),
+      ["Clasificacion", "Ingreso", "Egreso"], // Encabezado de la sección de movimientos
+      ...Object.entries(this.movimientos).map(([clasificacion, { ingreso, egreso }]) => [clasificacion, ingreso, egreso]),
     ];
     
     // Convertir el arreglo de arreglos a una hoja de cálculo de Excel
@@ -111,70 +112,95 @@ export class HomeComponent {
     // Guardar el libro de trabajo como un archivo Excel
     XLSX.writeFile(wb, 'reporte_datos.xlsx');
   }
-
+  
   exportToPDF(): void {
     const doc = new jsPDF();
-
+  
     // Título principal
-    doc.setFontSize(14);
-    doc.text("SEGUNDO Informe Financiero de las Asociaciones de Padres de Familia", 10, 10);
-    doc.text("Ciclo escolar 2021 - 2022", 10, 18);
-
+    doc.setFontSize(16);
+    doc.text("Informe Financiero", 10, 10);
+  
+    // Rango de fechas
+    doc.setFontSize(12);
+    doc.text(`FECHA INICIO: ${this.fechaInicio}  FECHA FIN: ${this.fechaFin}`, 10, 20);
+  
+    // Separador
+    doc.line(10, 25, 200, 25);
+  
     // Encabezado de la escuela
-    doc.setFontSize(12);
-    doc.text(`Escuela: ${this.Escuela.nombre}`, 10, 30);
-    doc.text(`Clave: ${this.Escuela.clave}`, 10, 40);
-    doc.text(`Zona: ${this.Escuela.zona}`, 10, 50);
-    doc.text(`Sector: ${this.Escuela.sector}`, 10, 60);
-    doc.text(`Domicilio: ${this.Escuela.domicilio}`, 10, 70);
-    doc.text(`Localidad: ${this.Escuela.localidad}`, 10, 80);
-    doc.text(`Teléfono: ${this.Escuela.telefono}`, 10, 90);
-    doc.text(`No. de Padre de Familia: ${this.Escuela.padreFamilia}`, 10, 100);
-    doc.text(`Total de Alumnos: ${this.Escuela.totalAlumnos}`, 10, 110);
-    doc.text(`Cuota de Padres de Familia: ${this.Escuela.cuotaPadres.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}`, 10, 120);
-    doc.text(`Total de Grupos: ${this.Escuela.totalGrupos}`, 10, 130);
-
-    // Separador
-    doc.line(10, 135, 200, 135);
-
-    // Ingresos Económicos
     doc.setFontSize(14);
-    doc.text("A. INGRESOS ECONÓMICOS", 10, 150);
-    doc.setFontSize(12);
-    doc.text(`Datos al Día: ${this.fechaFin}`, 10, 160);
-
-    const ingresos = this.movimientos.filter(mov => mov.tipo === 'ingreso');
-    let startY = 170;
-    ingresos.forEach(ingreso => {
-      doc.text(`${ingreso.clasificacion}: ${ingreso.ingreso.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}`, 10, startY);
-      startY += 10;
+    doc.text("DATOS ESCUELA", 10, 35);
+    doc.setFontSize(10);
+    Object.entries(this.Escuela).forEach(([key, value], index) => {
+      doc.text(`${key}: ${value}`, 10, 45 + (index * 8));
     });
-
-    doc.setFontSize(12);
-    doc.text(`TOTAL INGRESOS: ${this.calcularSumatoria('ingreso').toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}`, 10, startY + 10);
-    startY += 20;
-
+  
     // Separador
+    let startY = 45 + (Object.keys(this.Escuela).length * 8);
     doc.line(10, startY, 200, startY);
+  
+    // Encabezado de ingresos
     startY += 10;
-
-    // Egresos Registrados
     doc.setFontSize(14);
-    doc.text("B. EGRESOS REGISTRADOS", 10, startY);
-    doc.setFontSize(12);
-    doc.text(`Datos al Día: ${this.fechaFin}`, 10, startY + 10);
-
-    const egresos = this.movimientos.filter(mov => mov.tipo === 'egreso');
-    let egresosStartY = startY + 20;
-    egresos.forEach(egreso => {
-      doc.text(`${egreso.clasificacion}: ${egreso.egreso.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}`, 10, egresosStartY);
-      egresosStartY += 10;
+    doc.text("INGRESOS", 10, startY);
+    startY += 10;
+    doc.setFontSize(10);
+    doc.text("CLASIFICACION", 10, startY);
+    doc.text("IMPORTE", 150, startY);
+  
+    // Datos de ingresos
+    startY += 8;
+    let totalIngresos = 0;
+    Object.entries(this.movimientos).forEach(([clasificacion, { ingreso }]) => {
+      if (ingreso > 0) {
+        doc.text(clasificacion, 10, startY);
+        doc.text(ingreso.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }), 150, startY, { align: 'right' });
+        totalIngresos += ingreso;
+        startY += 8;
+      }
     });
-
-    doc.setFontSize(12);
-    doc.text(`TOTAL EGRESOS: ${this.calcularSumatoria('egreso').toLocaleString('es-MX', { style: 'currency', currency: 'MXN' })}`, 10, egresosStartY + 10);
-
+  
+    // Total ingresos
+    startY += 8;
+    doc.setFontSize(10);
+    doc.text("Total Ingresos:", 10, startY);
+    doc.text(totalIngresos.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }), 150, startY, { align: 'right' });
+  
+    // Separador
+    startY += 10;
+    doc.line(10, startY, 200, startY);
+  
+    // Encabezado de egresos
+    startY += 10;
+    doc.setFontSize(14);
+    doc.text("EGRESOS", 10, startY);
+    startY += 10;
+    doc.setFontSize(10);
+    doc.text("CLASIFICACION", 10, startY);
+    doc.text("IMPORTE", 150, startY);
+  
+    // Datos de egresos
+    startY += 8;
+    let totalEgresos = 0;
+    Object.entries(this.movimientos).forEach(([clasificacion, { egreso }]) => {
+      if (egreso > 0) {
+        doc.text(clasificacion, 10, startY);
+        doc.text(egreso.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }), 150, startY, { align: 'right' });
+        totalEgresos += egreso;
+        startY += 8;
+      }
+    });
+  
+    // Total egresos
+    startY += 8;
+    doc.setFontSize(10);
+    doc.text("Total Egresos:", 10, startY);
+    doc.text(totalEgresos.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }), 150, startY, { align: 'right' });
+  
     // Descargar el archivo PDF
     doc.save('reporte.pdf');
   }
+  
+
+
 }
