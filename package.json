@@ -2,10 +2,10 @@
   "name": "primarias",
   "version": "0.0.0",
   "scripts": {
-    "preinstall": "npm install --force",
+    "preinstall": "npm install --legacy-peer-deps",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --force --prod",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
